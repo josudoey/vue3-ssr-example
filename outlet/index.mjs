@@ -1,8 +1,8 @@
-import template from './template.pug'
+import * as render from './render.pug'
 import * as css from './style.css'
 
 const outlet = {
-  template,
+  ...render,
   setup () {},
   data () {
     return {

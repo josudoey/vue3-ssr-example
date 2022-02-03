@@ -7,7 +7,7 @@ export default async function () {
 
   return async (ctx, next) => {
     const html = await ssr({
-      appId: manifest.appId
+      appId: `_${manifest.hash}`
     })
 
     ctx.body = `<!DOCTYPE html>
@@ -20,7 +20,6 @@ export default async function () {
     </head>
     <body>${html}</body>
     <script src="${manifest['main.js']}" defer></script>
-    <script></script>
   </html>`
   }
 }

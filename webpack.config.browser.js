@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { WebpackManifestPlugin, getCompilerHooks } = require('webpack-manifest-plugin')
-const { assetOutputPath, manifestPath, publicPath } = require('./env')
+const { browserOutputPath, manifestPath, publicPath } = require('./env')
 
 class ManifestHashPlugin {
   apply (compiler) {
@@ -30,7 +30,7 @@ module.exports = function (env) {
   const config = {
     target: 'web',
     mode: 'production',
-    entry: path.join(__dirname, './outlet/asset.mjs'),
+    entry: path.join(__dirname, './outlet/browser/entry.mjs'),
     resolve: {
       alias: {
         vue$: 'vue/dist/vue.esm-bundler.js'
@@ -40,7 +40,7 @@ module.exports = function (env) {
       clean: true,
       filename: '[contenthash].js',
       chunkFilename: '[contenthash].js',
-      path: assetOutputPath,
+      path: browserOutputPath,
       publicPath: publicPath
     },
     optimization: {
@@ -89,7 +89,14 @@ module.exports = function (env) {
       }, {
         test: /render.pug$/,
         use: [{
-          loader: require.resolve('pug-loader')
+          loader: require.resolve('vue-loader/dist/templateLoader.js'),
+          options: {
+            minimize: {
+              collapseBooleanAttributes: true
+            }
+          }
+        }, {
+          loader: require.resolve('pug-plain-loader')
         }]
       }, {
         test: /template.pug$/,
@@ -101,10 +108,7 @@ module.exports = function (env) {
             }
           }
         }, {
-          loader: require.resolve('pug-html-loader'),
-          options: {
-            doctype: 'html'
-          }
+          loader: require.resolve('pug-plain-loader')
         }]
       }, {
         test: /\.css$/,

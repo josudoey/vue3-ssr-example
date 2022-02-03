@@ -1,6 +1,6 @@
 import webpack from 'webpack'
 import ssrConfig from './webpack.config.ssr.js'
-import assetConfig from './webpack.config.asset.js'
+import browserConfig from './webpack.config.browser.js'
 
 process.on('uncaughtException', function (err) {
   console.trace(err)
@@ -19,7 +19,7 @@ process.on('unhandledRejection', function (err) {
 
     const compiler = webpack([
       {
-        ...assetConfig(),
+        ...browserConfig(),
         ...override
       },
       {

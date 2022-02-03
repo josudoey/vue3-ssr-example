@@ -9,12 +9,11 @@ module.exports = function (env) {
   return {
     target: 'node',
     externals: [
-      '@vue/server-renderer',
       'vue'
     ],
     entry: {
       main: {
-        import: path.resolve('./outlet/ssr.mjs'),
+        import: path.resolve('./outlet/ssr/entry.mjs'),
         filename: 'main.mjs',
         library: {
           type: 'module'
@@ -81,7 +80,14 @@ module.exports = function (env) {
       }, {
         test: /render.pug$/,
         use: [{
-          loader: require.resolve('pug-loader')
+          loader: require.resolve('vue-loader/dist/templateLoader.js'),
+          options: {
+            minimize: {
+              collapseBooleanAttributes: true
+            }
+          }
+        }, {
+          loader: require.resolve('pug-plain-loader')
         }]
       }, {
         test: /template.pug$/,
@@ -93,10 +99,7 @@ module.exports = function (env) {
             }
           }
         }, {
-          loader: require.resolve('pug-html-loader'),
-          options: {
-            doctype: 'html'
-          }
+          loader: require.resolve('pug-plain-loader')
         }]
       }, {
         test: /\.css$/,

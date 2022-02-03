@@ -4,13 +4,13 @@ import * as http from 'http'
 import staticCache from 'koa-static-cache'
 import createRender from './create-render.mjs'
 import env from './env.js'
-const { publicPath, assetOutputPath } = env
+const { publicPath, browserOutputPath } = env
 
 ;(async function main () {
   const render = await createRender()
   const app = new Koa()
   const router = new KoaRouter()
-  app.use(staticCache(assetOutputPath, {
+  app.use(staticCache(browserOutputPath, {
     prefix: publicPath,
     maxAge: 1000 * 60 * 60 * 24 * 30,
     dynamic: true
