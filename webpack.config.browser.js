@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { WebpackManifestPlugin, getCompilerHooks } = require('webpack-manifest-plugin')
+const webpack = require('webpack')
 const { browserOutputPath, manifestPath, publicPath } = require('./env')
 
 class ManifestHashPlugin {
@@ -19,8 +20,7 @@ class ManifestHashPlugin {
     beforeEmit.tap(this.constructor.name, (manifest) => {
       return {
         ...manifest,
-        hash: self.hash,
-        appId: `_${self.hash}`
+        hash: self.hash
       }
     })
   }
@@ -144,6 +144,10 @@ module.exports = function (env) {
       }]
     },
     plugins: [
+      new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false
+      }),
       new WebpackManifestPlugin({
         fileName: manifestPath
       }),

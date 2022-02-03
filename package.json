@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:ssr": "NODE_ENV=production webpack --config ./webpack.config.ssr.js",
-    "build:browser": "NODE_ENV=production webpack --config ./webpack.config.browser.js",
-    "build": "npm run build:browser;npm run build:ssr",
+    "build": "NODE_ENV=production node ./build.mjs",
     "start": "NODE_ENV=production node ./app.mjs",
-    "dev": "nodemon ./dev.mjs --trace-warnings -e js,mjs,css,html,pug --ignore ./dist/* --ignore ./dist.dev/*"
+    "dev": "DEBUG=app:* nodemon --trace-warnings -e js,mjs,css,html,pug --ignore ./dist/* --ignore ./dist.dev/* --exec 'node build.mjs&&node ./app.mjs'",
   },
   "author": "Joey Fang",
   "license": "ISC",

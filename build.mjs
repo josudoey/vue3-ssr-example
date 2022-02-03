@@ -8,13 +8,13 @@ process.on('uncaughtException', function (err) {
 
 process.on('unhandledRejection', function (err) {
   console.trace(err)
-})
+});
 
-;(async function main () {
+(async function main () {
   await new Promise(function (resolve, reject) {
     const override = {
       mode: (process.env.NODE_ENV === 'production') ? 'production' : 'development',
-      devtool: 'eval'
+      devtool: 'source-map'
     }
 
     const compiler = webpack([
@@ -40,6 +40,4 @@ process.on('unhandledRejection', function (err) {
       resolve()
     })
   })
-
-  import('./app.mjs')
 })()
