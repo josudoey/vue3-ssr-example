@@ -1,10 +1,6 @@
-import env from './env.js'
-import manifest from './manifest.js'
+import { renderToString, createApp } from './ssr.mjs'
+import manifest from './manifest.mjs'
 export default async function () {
-  console.log(`create render by ${env.ssrPath}`)
-  const main = await import(env.ssrPath)
-  const { renderToString, createApp } = main
-
   return async (ctx, next) => {
     const html = await renderToString(createApp())
 

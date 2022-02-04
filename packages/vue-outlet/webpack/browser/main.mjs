@@ -2,7 +2,7 @@
 // see https://getbootstrap.com/docs/5.1/getting-started/webpack/#importing-compiled-css
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
-import createApp from '../create-app.mjs'
+import createApp from '~vue-outlet/create-app.mjs'
 
 ;(async function () {
   const vm = createApp()

@@ -2,7 +2,7 @@ import * as render from './render.pug'
 import * as css from './style.css'
 const outlet = {
   ...render,
-  setup () {},
+  setup () { },
   data () {
     return {
       css: css,
@@ -18,4 +18,5 @@ const outlet = {
     }
   }
 }
+
 export default outlet

@@ -4,7 +4,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { WebpackManifestPlugin, getCompilerHooks } = require('webpack-manifest-plugin')
 const webpack = require('webpack')
-const { browserOutputPath, manifestPath, publicPath } = require('./env')
 
 class ManifestHashPlugin {
   apply (compiler) {
@@ -27,10 +26,12 @@ class ManifestHashPlugin {
 }
 
 module.exports = function (env) {
-  const config = {
+  const { outputPath, publicPath, manifestPath } = env
+  return {
+    devtool: 'source-map',
     target: 'web',
-    mode: 'production',
-    entry: path.join(__dirname, './outlet/browser/entry.mjs'),
+    mode: (process.env.NODE_ENV === 'production') ? 'production' : 'development',
+    entry: path.join(__dirname, './entry.mjs'),
     resolve: {
       alias: {
         vue$: 'vue/dist/vue.esm-bundler.js'
@@ -40,7 +41,7 @@ module.exports = function (env) {
       clean: true,
       filename: '[contenthash].js',
       chunkFilename: '[contenthash].js',
-      path: browserOutputPath,
+      path: outputPath,
       publicPath: publicPath
     },
     optimization: {
@@ -136,7 +137,7 @@ module.exports = function (env) {
             esModule: true
           }
         }, {
-          loader: 'css-loader',
+          loader: require.resolve('css-loader'),
           options: {
             importLoaders: 1
           }
@@ -158,6 +159,4 @@ module.exports = function (env) {
       })
     ]
   }
-
-  return config
 }

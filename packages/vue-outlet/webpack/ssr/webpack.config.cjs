@@ -4,17 +4,19 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
-const { ssrOutputPath } = require('./env')
 
 module.exports = function (env) {
+  const { outputPath } = env
+
   return {
+    mode: (process.env.NODE_ENV === 'production') ? 'production' : 'development',
     target: 'node',
     externals: [
-      'vue'
+      // 'vue'/
     ],
     entry: {
       main: {
-        import: path.resolve('./outlet/ssr/entry.mjs'),
+        import: path.join(__dirname, './entry.mjs'),
         filename: 'main.mjs',
         library: {
           type: 'module'
@@ -30,13 +32,11 @@ module.exports = function (env) {
     },
     externalsType: 'node-commonjs',
     output: {
-      path: ssrOutputPath,
+      path: outputPath,
       chunkFormat: 'module'
     },
-    mode: 'production',
     resolve: {
-      alias: {
-      }
+      alias: {}
     },
     optimization: {
       minimizer: [
@@ -83,9 +83,7 @@ module.exports = function (env) {
         use: [{
           loader: require.resolve('vue-loader/dist/templateLoader.js'),
           options: {
-            minimize: {
-              collapseBooleanAttributes: true
-            }
+            // id: require('lodash/uniqueid')
           }
         }, {
           loader: require.resolve('pug-plain-loader')
