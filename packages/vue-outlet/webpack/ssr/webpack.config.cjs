@@ -11,9 +11,7 @@ module.exports = function (env) {
   return {
     mode: (process.env.NODE_ENV === 'production') ? 'production' : 'development',
     target: 'node',
-    externals: [
-      // 'vue'/
-    ],
+    externals: [],
     entry: {
       main: {
         import: path.join(__dirname, './entry.mjs'),
