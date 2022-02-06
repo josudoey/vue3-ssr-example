@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      ~example-vue3-webpack: workspace:^undefined
+      ~example-vue3-webpack: workspace:*
       babel-eslint: ^10.1.0
       eslint: ^7.32.0
       eslint-config-standard: ^16.0.3
@@ -114,6 +114,7 @@ importers:
   example-vue3/webpack/ssr:
     specifiers:
       '@popperjs/core': ^2.10.1
+      ~example-vue3: workspace:*
       bootstrap: ^5.1.1
       css-loader: ^6.2.0
       css-minimizer-webpack-plugin: ^3.0.2
@@ -132,6 +133,7 @@ importers:
       webpack-manifest-plugin: ^4.0.2
     dependencies:
       '@popperjs/core': 2.11.2
+      ~example-vue3: link:../..
       bootstrap: 5.1.3_@popperjs+core@2.11.2
       css-loader: 6.6.0_webpack@5.68.0
       css-minimizer-webpack-plugin: 3.4.1_webpack@5.68.0
