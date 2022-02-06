@@ -2,4 +2,5 @@
 // // see https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/src/entry-server.js
 
 export { renderToString } from 'vue/server-renderer'
-export { default as createApp } from '~example-vue3/create-app.mjs'
+export { createApp } from '~example-vue3/create-app.mjs'
+export { createRenderer } from '~example-vue3/create-renderer.mjs'
