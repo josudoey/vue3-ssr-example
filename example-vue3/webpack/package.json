@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "~vue-outlet-browser",
+  "name": "~example-vue3-webpack",
   "scripts": {
     "build": "NODE_ENV=production node ./build.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,6 @@
     "vue-loader": "^17.0.0",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
-    "webpack-manifest-plugin": "^4.0.2",
-    "~vue-outlet": "workspace:*"
+    "webpack-manifest-plugin": "^4.0.2"
   }
 }

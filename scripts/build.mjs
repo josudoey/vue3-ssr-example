@@ -1,4 +1,4 @@
-import main from '../packages/vue-outlet/webpack/main.mjs'
+import main from '~example-vue3-webpack/main.mjs'
 import env from '../env.js'
 
 (async function () {
