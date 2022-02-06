@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "~example-koa",
+  "version": "0.0.0",
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1",
+    "koa-session": "^6.2.0",
+    "koa-static-cache": "^5.1.4"
+  }
+}

@@ -1,30 +1,22 @@
-import Koa from 'koa'
-import KoaRouter from 'koa-router'
-import * as http from 'http'
-import staticCache from 'koa-static-cache'
-import manifest from './manifest.mjs'
-import { createRenderer, createApp } from './ssr.mjs'
-import env from './env.js'
+import http from 'http'
+import env from './env.cjs'
+import { ExampleVue3, createApp, createRouter } from '~example-koa/index.mjs'
+import vue3ExampleManifest from './example-vue3-manifest.mjs'
+import * as exampleVue3SSR from './example-vue3-ssr.mjs'
 const { publicPath, browserOutputPath } = env
 
 ;(async function main () {
-  const app = new Koa()
-  const router = new KoaRouter()
-  app.use(staticCache(browserOutputPath, {
-    prefix: publicPath,
-    maxAge: 1000 * 60 * 60 * 24 * 30,
-    dynamic: true
-  }))
-  const renderer = createRenderer(manifest)
-  router.get('/', async function (ctx, next) {
-    const vm = createApp()
-    const html = await renderer.renderToString(vm, {
-      state: ctx.state
-    })
-    ctx.status = 200
-    ctx.body = html
-  })
+  const app = createApp({})
+  const router = createRouter()
   app.use(router.routes())
+  ExampleVue3.install(app, {
+    ...exampleVue3SSR,
+    publicPath,
+    manifest: vue3ExampleManifest,
+    browserOutputPath
+  })
+  app.use(router.allowedMethods())
+
   const server = http.createServer(app.callback())
   server.on('listening', async function () {
     const address = server.address()

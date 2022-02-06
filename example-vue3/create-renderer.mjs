@@ -3,7 +3,7 @@ import { renderToString } from 'vue/server-renderer'
 const createRenderer = function (manifest) {
   return {
     async renderToString (vm, { state }) {
-      const html = await renderToString(vm)
+      const html = await renderToString(vm, state)
 
       return `<!DOCTYPE html>
       <html lang="en">

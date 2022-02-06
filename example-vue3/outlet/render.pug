@@ -1,3 +1,2 @@
-div
-  div(:class="[css.red]") hi {{msg}}
-  button.btn.btn-sm.btn-primary(@click="refresh") refresh
+router-view(v-slot="{ Component }")
+  component(:is="Component")
