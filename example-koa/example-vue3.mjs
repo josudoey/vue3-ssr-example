@@ -8,19 +8,18 @@ export function createRoute (ssr) {
     createRenderer,
     createApp,
     createMemoryRouter,
+    createPinia,
     manifest
   } = ssr
   const renderer = createRenderer(manifest)
   return async function (ctx, next) {
     const $router = createMemoryRouter()
-    const errOrRoute = await $router.push(ctx.url).catch((err) => err)
+    await $router.push(ctx.url)
     await $router.isReady()
 
-    const vm = await createApp().use($router)
-
-    const html = await renderer.renderToString(vm, {
-      state: ctx.state
-    })
+    const pinia = createPinia()
+    const app = await createApp().use(pinia).use($router)
+    const html = await renderer.renderToString(app)
 
     ctx.status = 200
     ctx.type = 'text/html'
@@ -56,6 +55,7 @@ export default {
       createRenderer,
       createApp,
       createMemoryRouter,
+      createPinia,
       manifest,
       browserOutputPath,
       publicPath
@@ -81,6 +81,7 @@ export default {
       createRenderer,
       createApp,
       createMemoryRouter,
+      createPinia,
       manifest
     })
 
