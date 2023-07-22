@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production node ./scripts/build.mjs",
-    "start": "NODE_ENV=production node ./main.mjs",
-    "dev": "DEBUG=app:* nodemon --trace-warnings -e js,mjs,css,html,pug --ignore ./dist/* --ignore ./dist.dev/* --exec 'node ./scripts/build.mjs&&node ./main.mjs'"
+    "build": "pnpm run --dir packages/example-vue build",
+    "serve": "pnpm run --dir packages/example-server serve",
+    "dev": "pnpm run --dir packages/example-server dev"
   },
   "packageManager": "pnpm@6.29.1",
   "author": "Joey Fang",
@@ -19,14 +19,8 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "nodemon": "^2.0.12",
-    "npm-run-all": "^4.1.5"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
   },
-  "dependencies": {
-    "koa": "^2.13.1",
-    "koa-router": "^10.1.1",
-    "koa-static-cache": "^5.1.4",
-    "~example-vue3-webpack": "workspace:*",
-    "~example-koa": "workspace:*"
-  }
+  "dependencies": {}
 }

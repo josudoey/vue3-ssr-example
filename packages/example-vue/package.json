@@ -1,0 +1,33 @@
+{
+  "name": "@vue3-ssr-example/example-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server",
+    "build": "npm run build:browser && npm run build:ssr",
+    "build:origin": "npm run build:client && npm run build:server",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
+    "build:browser": "vite build --ssrManifest --outDir dist/browser",
+    "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
+    "build:ssr": "vite build --ssr src/entry/ssr/main.js --outDir dist/ssr",
+    "serve": "NODE_ENV=production node server"
+  },
+  "dependencies": {
+    "connect": "^3.7.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "bootstrap": "^5.3.0",
+    "bootstrap-vue-next": "^0.9.25",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "pinia": "^2.1.4",
+    "pug": "^3.0.2",
+    "serve-static": "^1.15.0",
+    "unplugin-vue-components": "^0.25.1",
+    "vite": "^4.4.4",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
+  }
+}

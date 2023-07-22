@@ -1,0 +1,23 @@
+{
+  "name": "@vue3-ssr-example/example-server",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./scripts/serve-cli.js server --port 8080",
+    "serve": "NODE_ENV=production node ./scripts/serve-cli.js server --port 8080"
+  },
+  "dependencies": {
+    "@vue3-ssr-example/example-vue": "workspace:^",
+    "commander": "^11.0.0",
+    "koa": "^2.14.2",
+    "koa-bodyparser": "^4.3.0",
+    "koa-compress": "^5.1.1",
+    "koa-router": "^10.1.1",
+    "koa-session": "^6.2.0",
+    "koa-static-cache": "^5.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
